@@ -43,22 +43,22 @@ const Employee = ({ user, employee }) => {
                 <table class="table border w-full p-4">
                     <thead className='border'>
                         <tr>
-                            <th className='text-left border'>Name</th>
-                            <th className='text-left border'> Email</th>
-                            <th className='text-left border'> Phone</th>
-                            <th className='text-left border'>Action</th>
-                            <th className='text-left border'>Unlock Timesheet</th>
+                            <th className='text-left border p-3'>Name</th>
+                            <th className='text-left border p-3'> Email</th>
+                            <th className='text-left border p-3'> Phone</th>
+                            <th className='text-left border p-3'>Action</th>
+                            <th className='text-left border p-3'>Unlock Timesheet</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             employee.map(emp => (
                                 <tr key={emp.id}>
-                                    <td className='border'>{emp.name}</td>
-                                    <td className='border'>{emp.email}</td>
+                                    <td className='border p-3'>{emp.name}</td>
+                                    <td className='border p-3'>{emp.email}</td>
                                     {
                                         emp.employees.map(item => (
-                                            <td className='border'>{item.phone}</td>
+                                            <td className='border p-3'>{item.phone}</td>
                                         ))
                                     }
 

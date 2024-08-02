@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "@inertiajs/inertia-react": "^0.8.1",
-        "react-icons": "^5.2.1"
+        "react-icons": "^5.2.1",
+        "react-tailwindcss-select": "^1.8.5"
     }
 }

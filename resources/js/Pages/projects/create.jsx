@@ -21,6 +21,16 @@ const Create = ({ employees }) => {
     const handleChange = (e) => {
         setData(e.target.name, e.target.value);
     };
+    const Mulitple = (e) => {
+        const { options } = e.target;
+        const selectedEmployees = [];
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].selected) {
+                selectedEmployees.push(options[i].value);
+            }
+        }
+        setData('employee_id', selectedEmployees);
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -56,15 +66,15 @@ const Create = ({ employees }) => {
                         <input className='w-full rounded-lg' id="email" name='estimate_time' type="number" value={data.estimate_time} onChange={handleChange} required />
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label htmlFor="email">Employee Assign</label>
-                        <select name="employee_id" id="" value={data.employee_id} onChange={handleChange} className='w-full rounded-lg'>
+                        <select multiple name="employee_id" id="" value={data.employee_id} onChange={Mulitple} className='w-full rounded-lg'>
                             <option value="">Select Employee</option>
                             {employees.map((employee) => (
                                 <option key={employee.id} value={employee.id}>{employee.name}</option>
                             ))}
                         </select>
-                    </div>
+                    </div> */}
                     <div>
                         <label htmlFor="password">Estimate Budget</label>
                         <input className='w-full rounded-lg' id="password" name='estimate_budget' type="number" value={data.estimate_budget} onChange={handleChange} required />

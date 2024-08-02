@@ -10,6 +10,23 @@ import { FaPlus } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 const Projects = ({ user, projects }) => {
+
+    const HandleDelete = (e, id) => {
+
+        e.preventDefault();
+        if (confirm('Are you sure you want to delete this employee?')) {
+            axios.get(`/projects-delete/${id}`)
+                .then(response => {
+                    console.log(response);
+                    alert('Employee deleted successfully');
+                    // Redirect or update UI as needed
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+    }
     return (
         <div className='px-[8rem] '>
             <Header user={user} />
@@ -27,13 +44,13 @@ const Projects = ({ user, projects }) => {
                 </div>
                 <table class="table border w-full p-4">
                     <thead className='border'>
-                        <tr>
-                            <th className='text-left border'>Project Name</th>
+                        <tr >
+                            <th className='text-left border p-3'>Project Name</th>
                             {/* <th className='text-left border'> Project Code</th> */}
                             {/* <th className='text-left border'> Project Assign</th> */}
-                            <th className='text-left border'>Start Date</th>
-                            <th className='text-left border'>End Date</th>
-                            <th className='text-left border'>Action</th>
+                            <th className='text-left border p-3'>Start Date</th>
+                            <th className='text-left border p-3'>End Date</th>
+                            <th className='text-left border p-3'>Action</th>
                             {/* <th className='text-left border'>Unlock Timesheet</th> */}
                         </tr>
                     </thead>
@@ -41,15 +58,15 @@ const Projects = ({ user, projects }) => {
                         {
                             projects.map(emp => (
                                 <tr key={emp.id}>
-                                    <td className='border'>{emp.title}</td>
-                                    {/* <td className='border'>{emp.employee_id}</td> */}
-                                    <td className='border'>{emp.start_date}</td>
-                                    <td className='border'>{emp.end_date}</td>
+                                    <td className='border p-3'>  <Link href={`/projects-show/${emp.id}`}>{emp.title}</Link> </td>
+
+                                    <td td className='border p-3' > {emp.start_date}</td>
+                                    <td className='border p-3'>{emp.end_date}</td>
 
 
                                     <td className='border'>
                                         <div className='flex'>
-                                            <Link className='text-green-800 text-[1.5rem]' href={`employees-edit/${emp.id}`}><FaEdit /></Link>
+                                            <Link className='text-green-800 text-[1.5rem]' href={`projects-edit/${emp.id}`}><FaEdit /></Link>
 
                                             <button className='text-red-800 text-[1.5rem]' onClick={(e) => HandleDelete(e, emp.id)}><RiDeleteBinLine /></button>
                                         </div>
@@ -62,8 +79,8 @@ const Projects = ({ user, projects }) => {
 
                     </tbody>
                 </table>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 
