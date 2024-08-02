@@ -1,8 +1,9 @@
 import Header from '@/Layouts/Header'
 import Nav from '@/Layouts/Nav';
 import { Link } from '@inertiajs/react';
-import React from 'react'
+import React, { useState } from 'react'
 import { FaPlus } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
 import { MdLockClock } from "react-icons/md";
 import { post } from '@inertiajs/inertia';
@@ -14,7 +15,7 @@ const formatDate = (dateString) => {
 const Employee = ({ leave, user }) => {
 
 
-
+    const [modal, setModal] = useState(false)
 
     const HandleDelete = (e, id) => {
 
@@ -64,6 +65,40 @@ const Employee = ({ leave, user }) => {
         <div className='px-[8rem] '>
             <Header user={user} />
             <Nav />
+            {/* modal start */}
+
+            {
+                modal && (
+                    <div className='modal absolute top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center'>
+                        <div className='w-2/5  bg-white rounded-md p-4 px-6'>
+                            <div className='flex justify-between'>
+                                <h1 className='text-xl font-semibold'>Modal header</h1>
+                                <button onClick={()=>setModal(false)}><FaXmark /></button>
+                            </div>
+                            <hr className='my-2' />
+                            <form action="#" className='py-3 space-y-5'>
+                                <div className="form-group flex flex-col gap-2">
+                                    <label htmlFor="" className='text-sm font-medium'>Start Date</label>
+                                    <input type="date" className='form-input rounded' />
+                                </div>
+                                <div className="form-group flex flex-col gap-2">
+                                    <label htmlFor="" className='text-sm font-medium'>End Date</label>
+                                    <input type="date" className='form-input rounded' />
+                                </div>
+                                <div className="form-group flex flex-col gap-2">
+                                    <label htmlFor="" className='text-sm font-medium'>Number</label>
+                                    <input type="number" className='form-input rounded' />
+                                </div>
+                                <div>
+                                    <button className='text-sm px-8 py-2 bg-blue-500 font-semibold rounded-md text-white'>Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>)
+            }
+
+
+            {/* modal end */}
             <div className='table-section'>
                 <div className='flex justify-end '>
                     <div className='flex'>
@@ -114,6 +149,7 @@ const Employee = ({ leave, user }) => {
                                         >
                                             Reject
                                         </button> : ''}
+                                        <button onClick={(e) => setModal(true)} className='bg-blue-500 px-5 py-2 text-sm rounded-md font-medium text-white'>Modal</button>
                                     </td>
 
 
